@@ -2,6 +2,7 @@
 import './App.css'
 import CatFacts from './components/CatFacts'
 import CookieClicker from './components/CookieClicker'
+import UserList from './components/UserList'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <h1>React App</h1>
       <CookieClicker />
       <CatFacts />
+      <UserList />
     </>
   )
 }
