@@ -10,6 +10,7 @@ export default function CookieClicker() {
     return (
         <div className="cookie-clicker">
             <h2>Cookie Clicker</h2>
+            <img src="cookiemonster.png" alt="Cookie monster eating cookie"/>
             <button className="cookie-button" onClick={handleClick}>
                 <img
                     src="cookie.png"
