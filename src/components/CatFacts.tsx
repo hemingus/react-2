@@ -6,45 +6,65 @@ export default function CatFacts() {
     const [catImage, setCatImage] = useState("");
     const [loading, setLoading] = useState(true);
 
-    function getCatFact() {
-        setLoading(true);
-        fetch("https://catfact.ninja/fact")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setCatFact(data.fact);
-            })  
+    async function getCatFact() {
+        try {
+            setLoading(true);
+            const res = await fetch("https://catfact.ninja/fact");
+            const data = await res.json();
+            setCatFact(data.fact);
+        }
+        catch (err){
+            console.error(`Fetch failed: ${err}`);
+        }
+        finally {
+            setLoading(false);
+        }
     }
 
-    function getCatImage() {
-        
-        fetch("https://api.thecatapi.com/v1/images/search")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setCatImage(data[0].url);
-            })
+    async function getCatImage() {
+        try {
+            setLoading(true);
+            const res = await fetch("https://api.thecatapi.com/v1/images/search");
+            const data = await res.json();
+            setCatImage(data[0].url);
+        }
+        catch (err){
+            console.error(`Fetch failed: ${err}`);
+        }
+        finally {
+            setLoading(false);
+        }
     }
+    
 
-    function getCat() {
-        getCatImage();
-        getCatFact();
-        setLoading(false);
+    async function getCat() {
+        await getCatImage();
+        await getCatFact();
     }
 
     useEffect(() => {
         getCat();
+        const interval = setInterval(() => {
+            setLoading(false)
+        }, 2000);
+        return () => clearInterval(interval);
     }, [])
 
     return (
         <div className="cat-facts">
             <h2>Cat Facts</h2>
-            {catImage && <img src={catImage} alt="Image of a cat" />}
-            {loading ? <p>loading...</p> : 
+            
+            {loading ? 
             <div>
+                <img src="loadingkitten.png" alt="Black kitten sitting and waiting"/>
+                <p>loading...</p>
+            </div>
+            : 
+            <>
+                <p><span>Fun fact:</span> <br/>{catFact}</p>
+                {catImage && <img src={catImage} alt="Image of a cat" />}
                 <button onClick={getCat}>Get new cat</button>
-                <p>Fun fact: <br/>{catFact}</p>
-            </div>}
+            </>}
         </div>
     )
 }
