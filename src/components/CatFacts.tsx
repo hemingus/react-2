@@ -6,40 +6,33 @@ export default function CatFacts() {
     const [catImage, setCatImage] = useState("");
     const [loading, setLoading] = useState(true);
 
-    async function getCatFact() {
-        try {
-            setLoading(true);
-            const res = await fetch("https://catfact.ninja/fact");
-            const data = await res.json();
-            setCatFact(data.fact);
-        }
-        catch (err){
-            console.error(`Fetch failed: ${err}`);
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-
-    async function getCatImage() {
-        try {
-            setLoading(true);
-            const res = await fetch("https://api.thecatapi.com/v1/images/search");
-            const data = await res.json();
-            setCatImage(data[0].url);
-        }
-        catch (err){
-            console.error(`Fetch failed: ${err}`);
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-    
-
     async function getCat() {
-        await getCatImage();
-        await getCatFact();
+        setLoading(true);
+        try {
+            const [res1, res2] = await Promise.all([
+                fetch("https://catfact.ninja/fact").then(res => res.json()),
+                fetch("https://api.thecatapi.com/v1/images/search").then(res => res.json())
+            ]);
+
+            const fact = res1.fact;
+            const imageUrl = res2[0].url;
+
+            await new Promise<void>((resolve, reject) => {
+                const img = new Image();
+                img.src = imageUrl;
+                img.onload = () => resolve();
+                img.onerror = reject;
+
+            setCatFact(fact);
+            setCatImage(imageUrl);
+        });
+        }
+        catch (err) {
+            console.error(`Fetch failed: ${err}`);
+        }
+        finally {
+            setLoading(false);
+        } 
     }
 
     useEffect(() => {
