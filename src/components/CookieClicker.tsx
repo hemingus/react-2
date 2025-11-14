@@ -1,10 +1,18 @@
 import { useState } from "react"
 
+const yumyum = new Audio("yumyum.mp3");
+const cookies = new Audio("cookies.mp3");
+
 export default function CookieClicker() {
     const [points, setPoints] = useState(0);
 
     function handleClick() {
         setPoints(prev => prev + 1);
+        cookies.play();
+        setTimeout(() => {
+            yumyum.play();
+        }, 2500);
+        
     }
 
     return (
