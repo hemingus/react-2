@@ -127,3 +127,42 @@ body h2 {
   padding: 2rem;
   border-radius: 0.5rem;
 }
+
+.new-user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.new-user-form {
+  font-size: 1.2rem;
+}
+
+.new-user-form input {
+  font-size: 1.2rem;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.new-user-form label {
+  color: tan;
+  background-color: rgba(0,0,0,0.5);
+  width: fit-content;
+  padding: 0 1rem;
+  border-radius: 1rem;
+}
+
+.new-user-form button {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: tan;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.new-user-form button:hover {
+  background-color:rgb(255, 220, 133);
+}
