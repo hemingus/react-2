@@ -2,7 +2,7 @@
   "name": "react-2",
   "private": true,
   "version": "0.0.0",
-  "homepage": "react-2",
+  "homepage": "https://hemingus.github.io/react-2/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
