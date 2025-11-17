@@ -32,6 +32,25 @@ export default function UserList() {
         e.currentTarget.reset();
     }
 
+    const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+
+            const form = e.currentTarget.form;
+            if(!form) return;
+            const index = Array.prototype.indexOf.call(form, e.currentTarget);
+            const nextElement = form.elements.item(index + 1);
+
+            if (!nextElement) {
+                form.requestSubmit();
+                return;
+            }
+            if (nextElement instanceof HTMLElement) {
+                nextElement.focus();
+            }
+        }
+    };
+
     return (
         <div className="user-component">
             <h2>Users</h2>
@@ -41,13 +60,17 @@ export default function UserList() {
                 name="username"
                 id="name-input" 
                 type="text"
+                onKeyDown={handleEnterKey}
                 onChange={(e) => setFormData(prev => ({...prev, [e.target.name]: e.target.value}))}/>
+
                 <label htmlFor="email-input">Email: </label>
                 <input 
                 name="email"
                 id="email-input" 
                 type="text"
+                onKeyDown={handleEnterKey}
                 onChange={(e) => setFormData(prev => ({...prev, [e.target.name]: e.target.value}))}/>
+
                 <button  type="submit">Submit</button>
             </form>
             <ul className="user-list">
