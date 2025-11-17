@@ -12,7 +12,6 @@ export default function CookieClicker() {
         setTimeout(() => {
             yumyum.play();
         }, 2500);
-        
     }
 
     return (
