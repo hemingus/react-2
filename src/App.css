@@ -110,22 +110,29 @@ body h2 {
   align-items: center;
   gap: 1rem;
   border-radius: 0.5rem;
-  background-image: linear-gradient(tan, black);
+  background-color: rgba(210, 180, 140, 0.7);
   padding: 2rem;
 }
 
 .user-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: stretch;
+  align-items: stretch;
   gap: 1rem;
 }
 
 .user-card {
+  flex: 1;
   text-align: start;
   list-style: none;
-  background: grey;
+  background-image: linear-gradient(to top right, rgba(255, 255, 255, 0.5) -100%, black, rgba(255, 255, 255, 0.5) 200%);
   padding: 2rem;
   border-radius: 0.5rem;
+}
+
+.user-card p strong {
+  color: orange;
 }
 
 .new-user-form {
