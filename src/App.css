@@ -54,7 +54,7 @@ body h2 {
 }
 
 .cookie-button:active {
-  transform: translate(-50px, -10px);
+  transform: scale(110%);
 }
 
 .cookie-button img{
